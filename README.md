@@ -1,5 +1,22 @@
-Heroku Buildpack for create-react-app
+Custom Heroku Buildpack for create-react-app with max_body_size
 =====================================
+
+#### Fork this repo!
+Uses forked static buildpack: https://github.com/divadvo/heroku-buildpack-static 
+
+Thanks to @daemonsy for the original pull request which was never merged: https://github.com/heroku/heroku-buildpack-static/pull/42
+
+# Client Max Body Size
+By default, nginx has a default max body size of 1 megabyte. Any request above this size (e.g. uploading a 2m file) will result in a `413 Request Entity too Large` error. You can configure this value by setting `max_body_size` in `static.json`:
+
+```json
+{
+  "max_body_size": "10m"
+}
+```
+The size setting follows nginx's convention of bytes, kilobytes and megabytes (1024, 8k, 1m).
+
+----------------------
 
 Deploy React.js web apps generated with [create-react-app](https://github.com/facebook/create-react-app). Automates deployment with the built-in bundler and serves it up via [Nginx](http://nginx.org/en/). See the [introductory blog post](https://blog.heroku.com/deploying-react-with-zero-configuration) and entry in [Heroku elements](https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack).
 
